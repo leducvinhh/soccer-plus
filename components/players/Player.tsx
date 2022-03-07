@@ -8,7 +8,11 @@ const Player = ({ player, isCompetitor, length, onPlayer }: any) => {
     }
   }
   return (
-    <TouchableOpacity  style={ player.id < length ? styles.player : styles.playerLast} activeOpacity={1} onPress={() => handleTouch(player)}>
+    <TouchableOpacity
+      style={ player.id < length ? styles.player : styles.playerLast}
+      activeOpacity={1}
+      onPress={() => handleTouch(player)}
+    >
       <Text style={ !isCompetitor ? styles.playerNumber : styles.playerNumberCompetitor}>{player.number}</Text>
       <Text style={styles.playerPosition}>{player.position}</Text>
       <Text style={styles.playerName}>{player.name}</Text>

@@ -1,14 +1,23 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
+import LinearGradient from 'react-native-linear-gradient'
 
 const Button = ({ action, length, onButtonTouch }: any) => {
   const handleTouchAction = (action: any) => {
-    if(onButtonTouch) onButtonTouch(action)
+    if (onButtonTouch) onButtonTouch(action)
   }
   return (
-    <TouchableOpacity activeOpacity={0.7} style={action.id < length ? styles.actionWrapper : styles.actionWrapperLast} onPress={() => handleTouchAction(action)}>
-      <Text style={styles.button}>{action.title}</Text>
-    </TouchableOpacity>
+    <LinearGradient
+      colors={['#A2A2A2', '#898989']}
+      style={action.id < length ? styles.actionWrapper : styles.actionWrapperLast}
+    >
+      <TouchableOpacity
+        activeOpacity={0.7}
+        onPress={() => handleTouchAction(action)}
+      >
+        <Text style={styles.button}>{action.title}</Text>
+      </TouchableOpacity>
+    </LinearGradient>
   )
 }
 

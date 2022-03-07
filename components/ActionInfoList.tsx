@@ -1,15 +1,15 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 
-const ActionInfoList = ({actions, deleteItem}:any) => {
-    const handleClick = (id:any) => {
-        if(deleteItem) deleteItem(id)
+const ActionInfoList = ({ actions, deleteItem }: any) => {
+    const handleClick = (id: any) => {
+        if (deleteItem) deleteItem(id)
     }
-  return (
-    <View  style={styles.wrapper}>
-        {
-            actions.map((action: any, index: any) => (
-                <View style={styles.btn} key={action.id}>
+    return (
+        <View>
+            {
+                actions.map((action: any, index: any) => (
+                    <View style={styles.btn} key={action.id}>
                         <Text style={styles.number}>player: {action.player}</Text>
                         <Text style={styles.locationX}>x: {action.positionX}</Text>
                         <Text style={styles.locationY}>y: {action.positionY}</Text>
@@ -20,19 +20,16 @@ const ActionInfoList = ({actions, deleteItem}:any) => {
                                 Delete
                             </Text>
                         </TouchableOpacity>
-                </View>
-            ))
-        }
-    </View>
-  )
+                    </View>
+                ))
+            }
+        </View>
+    )
 }
 
 export default ActionInfoList
 
 const styles = StyleSheet.create({
-    wrapper: {
-
-    },
     btn: {
         width: 1024,
         marginBottom: 10,

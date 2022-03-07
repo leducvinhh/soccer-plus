@@ -12,6 +12,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { ScrollView, StyleSheet, View, Text } from 'react-native';
 import ActionInfoList from './components/ActionInfoList';
 import ActionList from './components/actions/ActionList';
+import Header from './components/header/Header';
 import Pitch from './components/pitch/Pitch';
 import PlayerList from './components/players/PlayerList';
 import { ActionItem } from './models';
@@ -70,7 +71,6 @@ const App = () => {
     }, [loadDataCallback]);
 
     const addAction = async (data: any) => {
-        console.log(data);
         try {
             const newActions = [...actions, { ...data, id: new Date().getTime() }];
             setActions(newActions);
@@ -124,18 +124,28 @@ const App = () => {
     return (
         <View style={styles.container}>
             <ScrollView>
+                <Header />
                 <View style={styles.appWrapper}>
                     <PlayerList onPlayer={onPlayerTouch} isCompetitor={false} playerList={playerList} />
 
                     <View style={styles.content}>
                         <View style={styles.pitch}>
-                            <Text style={styles.process}></Text>
+                            <View style={styles.process}>
+                                <View style={styles.processItem}>
+                                    <Text style={{marginRight: 5, fontSize: 12, fontWeight: 'bold', color: '#65377B'}}>50%</Text>
+                                    <View style={styles.processLeft}></View>
+                                </View>
+                                <View style={styles.processItemLast}>
+                                    <View style={styles.processRight}></View>
+                                    <Text style={{marginLeft: 5, fontSize: 12, fontWeight: 'bold', color: '#468666'}}>50%</Text>
+                                </View>
+                            </View>
                             <Pitch number={playerNum} showDot={showDot} onPitTouch={onPitchTouch} />
                         </View>
                         <View style={styles.listAction}>
+                            <ActionList onButtonTouch={onButtonTouch} length={listAction.length} action={listAction[0]} />
                             <ActionList onButtonTouch={onButtonTouch} length={listAction.length} action={listAction[1]} />
                             <ActionList onButtonTouch={onButtonTouch} length={listAction.length} action={listAction[2]} />
-                            <ActionList onButtonTouch={onButtonTouch} length={listAction.length} action={listAction[0]} />
                             <ActionList onButtonTouch={onButtonTouch} length={listAction.length} action={listAction[3]} />
                         </View>
                     </View>
@@ -184,10 +194,43 @@ const styles = StyleSheet.create({
         borderStartColor: 'red'
     },
     process: {
-        backgroundColor: 'red',
+        display: 'flex',
+        flexDirection: 'row',
+        backgroundColor: '#EEEEEE',
         marginBottom: 10,
         borderRadius: 3,
-        height: 12
+        height: 18,
+        paddingLeft: 10,
+        paddingRight: 10,
+        marginRight: -3,
+    },
+
+    processItem: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '50%',
+        marginRight: 3
+    },
+    processItemLast: {
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        width: '50%',
+    },
+    processLeft: {
+        backgroundColor: '#65377B',
+        flexGrow: 1,
+        height: 5,
+        borderTopLeftRadius: 30,
+        borderBottomLeftRadius: 30
+    },
+    processRight: {
+        backgroundColor: '#468666',
+        flexGrow: 1,
+        height: 5,
+        borderBottomRightRadius: 30,
+        borderTopRightRadius: 30,
     },
     pitch: {
         backgroundColor: '#FFF',
@@ -198,7 +241,6 @@ const styles = StyleSheet.create({
     listInfo: {
         marginTop: 20,
         flex: 1,
-        backgroundColor: '#E2E2E2'
     }
 });
 
